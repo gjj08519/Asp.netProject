@@ -1,0 +1,102 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Order History";
+    ViewData["ActivePage"] = ManageNavPages.Orders;
+}
+
+<h4>@ViewData["Title"]</h4>
+
+<table class="table table-hover" style="background-color:slategray;">
+    <thead >
+        <tr>
+            <th  class="text-sm-center">
+                Order Number
+            </th>
+            
+            <th  class="text-sm-center">
+                Order Time
+            </th>
+            <th class="text-sm-center">
+                Order Details
+            </th>
+            <th class="text-sm-center">
+                Order status
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model.Orders)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => order.Id)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => order.OrderTime)
+                </td>
+                <td>
+                    <table class="table table-hover" style="background-color:powderblue;">
+                        <thead>
+                            <tr>
+                                <th class="text-sm-center">Product</th>
+                                <th class="text-sm-center">
+                                    Quantity
+                                </th>
+                                <th class="text-right">
+                                    Unit Price
+                                </th>
+                                <th class="text-right">
+                                    Sub-total
+                                </th>
+                              
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.OrderDetails[order])
+                            {
+                                <tr>
+                                    <td>
+                                        @(string.Format("{0} ({1})",
+                                                item.Product.Name,
+                                                item.Portion.Label))
+                                    </td>
+                                    <td class="text-sm-center">
+                                        @Html.DisplayFor(modelItem => item.Quantity)
+                                    </td>
+                                    <td class="text-right">
+                                        @item.UnitPrice.ToString("c2")
+                                    </td>
+                                    <td class="text-right">
+                                        @((item.UnitPrice * item.Quantity).ToString("c2"))
+                                    </td>
+
+                                </tr>
+                            }
+                            <tr>
+                                <td colspan="5"></td>
+                            </tr>
+                            <tr class="table-primary" style="font-weight: bold;">
+                                <td colspan="3">Total Price:</td>
+                                <td class="text-right">@Model.TotalForeachOrder[order].ToString("c2")</td>
+                                <td></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => order.Status)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

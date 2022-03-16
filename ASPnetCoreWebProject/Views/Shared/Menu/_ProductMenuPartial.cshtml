@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@model MenuItemViewModel
+
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+
+<!-- Assisted by: https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_layout_named -->
+<!-- Image Sources: https://yesofcorsa.com/pepperoni-pizza/, https://bellassubpizza.com/product/16-large-cheese-pizza/, https://www.tripadvisor.ca/LocationPhotoDirectLink-g155019-d8460552-i153287670-Jz_s_Pizza-Toronto_Ontario.html, https://www.wallpaperbetter.com/food-wallpaper/veggie-pizza-3090, http://www.immadeofsugar.com/2014/01/poutine-pizza-from-pizza-hut.html, https://www.huffpost.com/entry/xbox-pizza-hut_n_4570898, https://www.thetastyk.com/2016/07/26/healthy-vegan-pizza/ -->
+<div class="grid-container">
+    @foreach (var product in Model.Products)
+    {
+    <div class="product-display" product-id="@product.Id">
+        <h1 class="product-name">@product.Name</h1>
+        <img src="@ViewData["ImageSource"]/@(product.ImageName).jpg" alt="@product.Name" />
+        <h4 class="product-description">@product.Description</h4>
+        <div class="product-details">
+            <select autocomplete="off" class="form-control select-product-portion" product-id="@product.Id">
+                <option value="@product.Portions[0].Label" portion-index="0" selected>@product.Portions[0].Label</option>
+                @for (int portionIterator = 1; portionIterator < product.Portions.Count; portionIterator++)
+                {
+                    <option value="@product.Portions[portionIterator].Label" portion-index="@portionIterator">@product.Portions[portionIterator].Label</option>
+                }
+            </select>
+            <select autocomplete="off" type="number" placeholder="quantity" class="select-product-quantity" product-id="@product.Id">
+                <option value="1" selected>1</option>
+                @for (int quantityIterator = 2; quantityIterator <= 25; quantityIterator++)
+                {
+                    <option value="@quantityIterator">@quantityIterator</option>
+                }
+            </select>
+            <h3 class="product-price" product-id="@product.Id" portion-index="0" style="display: block">@product.Prices[0].ToString("c") per portion</h3>
+            @for (int priceIterator = 1; priceIterator < product.Prices.Count; priceIterator++)
+            {
+                <h3 class="product-price" product-id="@product.Id" portion-index="@priceIterator" style="display: none">@product.Prices[priceIterator].ToString("c") per portion</h3>
+            }
+        </div>
+        <form asp-controller="Cart" asp-action="AddCartItem">
+            <input hidden asp-for="ChosenProductId" value="@product.Id" />
+            <input class="chosen-portion" product-id="@product.Id" hidden asp-for="ChosenProductPortion" />
+            <input class="chosen-quantity" product-id="@product.Id" hidden asp-for="ChosenProductQuantity" />
+            <button class="product-add-to-cart btn btn-success" product-id="@product.Id">Add To Cart</button>
+        </form>
+        @if (SignInManager.IsSignedIn(User))
+        {
+    <form asp-controller="Favorite" asp-action="AddFavorites">
+        <input hidden asp-for="ChosenProductId" value="@product.Id" />
+        <button class="btn btn-success" product-id="@product.Id">Add to Favorite</button>
+    </form>
+               
+                }
+        </div>
+    }
+</div>

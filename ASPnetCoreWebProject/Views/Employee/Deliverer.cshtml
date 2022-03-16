@@ -1,0 +1,125 @@
+﻿@using PizzaWebsite.Data.Entities
+@using System.Security.Claims;
+
+@{
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+
+}
+
+<div class="text-center">
+    <h1 class="display-4">Orders</h1>
+
+    <h2>Ready Orders</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    Order Id
+                </th>
+
+                <th>
+                    Client Name
+                </th>
+
+                <th>
+                    Time Finished Cooking
+                </th>
+
+                <th>
+                    Address
+                </th>
+
+                <th>
+                    Status
+                </th>
+
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (ViewBag.Orders != null)
+            {
+                @foreach (Order item in ViewBag.Orders)
+                {
+                    @if (item.Status == Status.Ready || item.Status == Status.Pending || ReceptionMethod.Delivery == item.ReceptionMethod)
+                    {
+                        <tr>
+                            <td>
+                                @item.Id
+                            </td>
+
+                            <td>
+                                @{string.Format("{0} {1}", item.CustomerFirstName, item.CustomerLastName); }
+                                @item.CustomerFirstName
+                            </td>
+
+                            <td class="text-sm-center">
+                                @Html.DisplayFor(modelItem => item.TimeCompleted)
+                            </td>
+
+                            <td class="text-sm-center">
+                                <table class="table table-hover">
+                                    @if (item.DeliveryAddress != null)
+                                    {
+                                        @item.DeliveryAddress
+                                    }
+                                    else
+                                    {
+                                        @Html.Display("The delivery Address is null");
+                                    }
+                                </table>
+
+                            </td>
+
+                            <td class="text-right">
+
+                                @{
+                                    Status status;
+
+
+                                    switch (item.Status)
+                                    {
+                                        case Status.Ready:
+                                            <a asp-controller="Employee"
+                                               asp-action="UpdateOrderStatus"
+                                               asp-route-cartId="@item.CartId"
+                                               asp-route-orderId="@item.Id"
+                                               asp-route-newStatus="@Status.Pending"
+                                               asp-route-redirectPage="Deliverer">Deliver Order</a>
+                                            break;
+                                        case Status.Pending:
+                                            @if (item.DelivererId == null || item.DelivererId != User.FindFirstValue(ClaimTypes.NameIdentifier))
+                                            {
+                                                <a>Order Taken by Another Deliverer</a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="Employee"
+                                                   asp-action="UpdateOrderStatus"
+                                                   asp-route-cartId="@item.CartId"
+                                                   asp-route-orderId="@item.Id"
+                                                   asp-route-newStatus="@Status.Completed"
+                                                   asp-route-redirectPage="Deliverer">Complete Order</a>
+                                            }
+                                            break;
+                                    }
+
+                                }
+                            </td>
+                        </tr>
+
+
+                    }
+                }
+                <tr>
+                    <td colspan="5"></td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+
+</div>

@@ -1,0 +1,63 @@
+﻿@using PizzaWebsite.Data.Entities
+@model PizzaWebsite.Models.FavoriteItemViewModel
+
+@{ ViewData["Title"] = "Favorites"; }
+
+<h1>Favorites</h1>
+
+<p>
+    <a asp-controller="Menu" asp-action="Index">Add more Favorites</a>
+</p>
+<div class="grid-container">
+    @foreach (var product in Model.Products)
+    {
+<div class="product-display" product-id="@product.Id">
+    <h1 class="product-name">@product.Name</h1>
+    @if (product.Category == ProductCategory.Pizza)
+    {
+        ViewData["ImageSource"] = "/images/menu/pizza-menu";
+    }
+    @if (product.Category == ProductCategory.Drink)
+    {
+        ViewData["ImageSource"] = "/images/menu/drink-menu";
+    }
+    @if (product.Category == ProductCategory.Burger)
+    {
+        ViewData["ImageSource"] = "/images/menu/burger-menu";
+    }
+    @if (product.Category == ProductCategory.Side)
+    {
+        ViewData["ImageSource"] = "/images/menu/side-menu";
+    }
+
+    <img src="@ViewData["ImageSource"]/@(product.ImageName).jpg" alt="@product.Name" />
+    <h4 class="product-description">@product.Description</h4>
+    <div class="product-details">
+        <select autocomplete="off" class="form-control select-product-portion" product-id="@product.Id">
+            <option value="@product.Portions[0].Label" portion-index="0" selected>@product.Portions[0].Label</option>
+            @for (int portionIterator = 1; portionIterator < product.Portions.Count; portionIterator++)
+            {
+<option value="@product.Portions[portionIterator].Label" portion-index="@portionIterator">@product.Portions[portionIterator].Label</option>
+}
+        </select>
+        <select autocomplete="off" type="number" placeholder="quantity" class="select-product-quantity" product-id="@product.Id">
+            <option value="1" selected>1</option>
+            @for (int quantityIterator = 2; quantityIterator <= 25; quantityIterator++)
+            {
+<option value="@quantityIterator">@quantityIterator</option>
+}
+        </select>
+        <h3 class="product-price" product-id="@product.Id" portion-index="0" style="display: block">@product.Prices[0].ToString("c") per portion</h3>
+        @for (int priceIterator = 1; priceIterator < product.Prices.Count; priceIterator++)
+        {
+<h3 class="product-price" product-id="@product.Id" portion-index="@priceIterator" style="display: none">@product.Prices[priceIterator].ToString("c") per portion</h3>}
+    </div>
+
+</div>
+<a asp-controller="Favorite" asp-action="DeleteFavorite" asp-route-productId="@product.Id" >Delete</a> 
+ }
+
+</div>
+
+<link rel="stylesheet" href="~/css/product-menu.css" />
+<script src="~/js/productMenu.js"></script>

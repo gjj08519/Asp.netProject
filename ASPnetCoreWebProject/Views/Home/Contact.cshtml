@@ -1,0 +1,217 @@
+﻿@model PizzaWebsite.Models.ContactViewModel
+
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<hr />
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="col">
+                <!-- Telephone -->
+                <div class="row">
+                    <p>☎️ Tel: <a href="tel:5555555555">555 555 5555</a></p>
+                </div>
+                <!-- Email -->
+                <div class="row">
+                    <p>📧 Email: <a href="mailto:company@gmail.com">company@gmail.com</a></p>
+                </div>
+                <!-- Address -->
+                <div class="row">
+                    <p>📌 Address: @ViewData["CompanyAddress"]</p>
+                </div>
+            </div>
+            <!-- Google Map -->
+            <div class="map" id="map"></div>
+            <hr />
+            <!-- Service hours -->
+            <div class="col">
+                <div class="row">
+                    <p>📅 Service hours</p>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>Monday</td>
+                                <td>8:00 - 23:00</td>
+                            </tr>
+                            <tr>
+                                <td>Tuesday</td>
+                                <td>8:00 - 23:00</td>
+                            </tr>
+                            <tr>
+                                <td>Wednesday</td>
+                                <td>8:00 - 23:00</td>
+                            </tr>
+                            <tr>
+                                <td>Thursday</td>
+                                <td>8:00 - 23:00</td>
+                            </tr>
+                            <tr>
+                                <td>Friday</td>
+                                <td>8:00 - 23:00</td>
+                            </tr>
+                            <tr>
+                                <td>Saturday</td>
+                                <td>8:00 - 23:00</td>
+                            </tr>
+                            <tr>
+                                <td>Sunday</td>
+                                <td>Closed</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-4">
+            <h2>Want to send us a message?</h2>
+            <br />
+            <!-- Contact from -->
+            <form id="form-contact" asp-action="ContactSuccess">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="control-label required-label"></label>
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="control-label required-label"></label>
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label required-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Topic" class="control-label required-label"></label>
+                    <select asp-for="Topic" class="form-control">
+                        <option value="" disabled selected>Select a topic</option>
+                        @foreach (string topic in ContactViewModel.Topics)
+                        {
+                            <option value=@topic>@topic</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Topic" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Message" class="control-label required-label"></label>
+                    <textarea style="min-height: 100px" asp-for="Message" class="form-control"></textarea>
+                    <span asp-validation-for="Message" class="text-danger"></span>
+                </div>
+                <div>
+                    <span>(*) means required.</span>
+                </div>
+
+                <div class="form-group">
+                    <input id="reCaptchaResponse" type="hidden" asp-for="ReCaptchaResponse" />
+                </div>
+
+                <br />
+                <!-- reCAPTCHA form -->
+                <div class="g-recaptcha"
+                     data-sitekey="@ViewData["ReCaptchaSiteKey"]" data-callback="enableFormSubmission"></div>
+                <br />
+
+                <div id="btn-group-form" class="btn-group">
+                    <div class="form-group">
+                        <input id="btn-submit-form" type="submit" value="Send" class="btn btn-primary" disabled />
+                    </div>
+                    <div class="form-group">
+                        <button id="btn-reset-form" class="btn btn-outline-info">Reset</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to Home</a>
+</div>
+
+<!-- style sheet -->
+<link rel="stylesheet" href="~/css/contact.css" />
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <!-- reCAPTCHA api -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <!-- Google Maps api -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=@ViewData["GoogleMapsApiKey"]&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cABC" async defer></script>
+    <script>
+        let form;
+        let reCaptchaResponse;
+        let submitButton;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            form = document.getElementById("form-contact");
+            reCaptchaResponse = document.getElementById("reCaptchaResponse");
+            submitButton = document.getElementById("btn-submit-form");
+
+            document.getElementById("btn-reset-form").addEventListener("click", resetForm);
+        });
+
+        function initMap() {
+            const mapElement = document.getElementById("map");
+            mapElement.style.height = "300px";
+
+            // get company location
+            const companyLocation = {
+                lat: @ViewData["Latitude"],
+                lng: @ViewData["Longitude"]
+            };
+
+            // initialize map
+            const map = new google.maps.Map(mapElement, {
+                zoom: 16,
+                center: companyLocation,
+            });
+
+            // set marker
+            new google.maps.Marker({
+                position: companyLocation,
+                map
+            });
+        }
+
+        function enableFormSubmission() {
+            // get the reCAPTCHA response
+            reCaptchaResponse = document.getElementById("reCaptchaResponse");
+            reCaptchaResponse.value = grecaptcha.getResponse();
+
+            // enable submit button
+            enableSubmitButton();
+        }
+
+        function enableSubmitButton() {
+            submitButton.disabled = false;
+        }
+
+        function disableSubmitButton() {
+            submitButton.disabled = true;
+        }
+
+        function resetForm(e) {
+            // reset all fields
+            form.reset();
+
+            // reset reCAPTCHA
+            grecaptcha.reset();
+            reCaptchaResponse.value = null;
+
+            // disable submit button
+            disableSubmitButton();
+
+            // stop submitting form
+            e.preventDefault();
+        }
+    </script>
+}

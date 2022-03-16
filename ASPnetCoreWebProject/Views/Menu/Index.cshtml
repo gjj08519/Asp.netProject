@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Menu";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Please select a Category</h1>
+</div>
+
+<!-- Assisted by: https://www.w3schools.com/css/tryit.asp?filename=trycss_grid_layout_named, https://www.w3schools.com/howto/howto_css_image_text.asp -->
+<div class="grid-container">
+    <div class="product-category">
+        <a asp-action="Pizzas">
+            <!-- Source: https://www.huffpost.com/entry/xbox-pizza-hut_n_4570898 -->
+            <img src="~/images/menu/meat-lovers-pizza.jpg" alt="Pizza" />
+            <h2 class="product-category-label">Pizzas</h2>
+        </a>
+    </div>
+    <div class="product-category">
+        <a asp-action="Drinks">
+            <!-- Source: https://www.livestrong.com/article/306908-how-many-calories-does-soda-have/ -->
+            <img src="~/images/menu/fanta.jpg" alt="Drink" />
+            <h2 class="product-category-label">Drinks</h2>
+        </a>
+    </div>
+    <div class="product-category">
+        <a asp-action="Burgers">
+            <!-- Source: https://www.thelist.com/227723/this-is-the-trick-to-making-juicy-burgers/ -->
+            <img src="~/images/menu/all-dressed-burger.jpg" alt="Burger" />
+            <h2 class="product-category-label">Burgers</h2>
+        </a>
+    </div>
+    <div class="product-category">
+        <a asp-action="Sides">
+            <!-- Source: https://www.delish.com/cooking/recipe-ideas/a28349714/double-fried-french-fries-recipe/ -->
+            <img src="~/images/menu/french-fries.jpg" alt="Side Dish" />
+            <h2 class="product-category-label">Sides</h2>
+        </a>
+    </div>
+</div>
+
+<link rel="stylesheet" href="~/css/category-menu.css" />
+
+

@@ -1,0 +1,14 @@
+﻿@model PizzaWebsite.Models.ContactViewModel
+
+@{
+    ViewData["Title"] = "Contact Success";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h3>Thank you @Model.FirstName @Model.LastName</h3>
+    <hr />
+    <p>A copy of the message was sent to us as well as to your email: @Model.Email.</p>
+</div>
+

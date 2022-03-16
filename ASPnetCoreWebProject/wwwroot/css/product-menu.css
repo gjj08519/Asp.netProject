@@ -1,0 +1,36 @@
+﻿.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 1fr;
+    grid-gap: 5em;
+}
+
+.product-display {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.product-name, .product-description {
+    text-align: center;
+}
+
+.product-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.select-product-portion {
+    max-width: 10em;
+}
+
+.select-product-quantity {
+    max-width: 3em;
+}
+
+.product-add-to-cart {
+    max-width: 8em;
+    margin: 0 auto;
+}

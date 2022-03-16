@@ -1,0 +1,138 @@
+﻿@using PizzaWebsite.Data.Seeder
+@using PizzaWebsite.Helpers
+
+@model OwnerViewModel
+
+@{ Layout = "~/Views/Shared/_EmployeeLayout.cshtml"; }
+
+<div class="text-center">
+    <h1 class="display-4">Welcome Owner</h1>
+</div>
+
+<hr />
+<div>
+    <ul class="nav nav-pills">
+        <li class="nav-item"><a class="nav-link" id="employees" asp-page="">Employees</a></li>
+        <li class="nav-item"><a class="nav-link" id="employees" asp-page="">Orders</a></li>
+        <li class="nav-item"><a class="nav-link" id="employees" asp-page="">Dashboard</a></li>
+    </ul>
+</div>
+<hr />
+<br />
+<a asp-action="RegisterEmployee">Register an employee</a>
+<hr />
+<div class="row">
+    <div class="table-responsive table-responsive{-sm|-md|-lg|-xl}">
+        <table style="min-width: 1500px" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        First Name
+                    </th>
+                    <th>
+                        Last Name
+                    </th>
+                    <th>
+                        Role
+                    </th>
+                    <th>
+                        Start Date
+                    </th>
+                    <th>
+                        Username
+                    </th>
+                    <th>
+                        Email
+                    </th>
+                    <th>
+                        Phone
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var info in Model.EmployeeInfos)
+                {
+                    <tr>
+                        <td>
+                            @info.FirstName
+                        </td>
+                        <td>
+                            @info.LastName
+                        </td>
+                        <td>
+                            <form id="@($"form-role--{info.UserId}")" 
+                                  class="form-employee-role" 
+                                  asp-controller="Employee" asp-action="EditEmployee" 
+                                  asp-route-userId="@info.UserId">
+
+                                <div class="form-group">
+                                    <select id="@($"select-role--{info.UserId}")" class="form-control">
+                                        @foreach (UserIdentityDataSeeder.Roles role in EnumHelper.GetValues<UserIdentityDataSeeder.Roles>())
+                                        {
+                                            @if (role == UserIdentityDataSeeder.Roles.Customer)
+                                            {
+                                                continue;
+                                            }
+
+                                            @if (role.ToString() == @info.Role.Name)
+                                            {
+                                                <option selected value=@role>@role</option>
+                                            }
+                                            else
+                                            {
+                                                <option value=@role>@role</option>
+                                            }
+                                        }
+                                    </select>
+                                </div>
+                            </form>
+                        </td>
+                        <td>
+                            @info.CreatedAt
+                        </td>
+                        <td>
+                            @info.UserName
+                        </td>
+                        <td>
+                            @info.Email
+                        </td>
+                        <td>
+                            @(info.PhoneNumber == null? "N/a" : @info.PhoneNumber)
+                        </td>
+                        <td>
+                            <input id="@($"save-employee-btn--{info.UserId}")" class="employee-save-btn" type="submit" form="@($"form-role--{info.UserId}")" value="Save">
+                            <a asp-controller="Employee" asp-action="ConfirmRemovingEmployee" asp-route-userId="@info.UserId" asp-route-role="@info.Role"  asp-route-employeeName="@($"{info.FirstName} {info.LastName}")">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+  
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementsByClassName("container")[0];
+            container.style.minWidth = "1500px";
+
+            const forms = document.getElementsByClassName("form-employee-role");
+
+            for (const form of forms) {
+                const userId = form.id.split("--")[1];
+
+                const saveBtn = document.getElementById(`save-employee-btn--${userId}`);
+                const selectRole = document.getElementById(`select-role--${userId}`);
+
+                saveBtn.addEventListener("click", () => {
+                    // add currently selected role to action parameters
+                    form.action += `&roleName=${selectRole.value}`;
+                });
+            }
+        });
+    </script>
+}

@@ -1,0 +1,30 @@
+@using Microsoft.AspNetCore.Identity
+
+@inject PizzaWebsite.Data.Repositories.IPizzaWebsiteRepository PizzaWebsiteRepository
+
+<ul class="nav navbar-nav navbar-collapse collapse" style="display: flex; justify-content: space-around; flex-direction: row " ; justify-content: space-around; padding-left: 1rem; padding-right: 1rem; padding-top: 1rem; padding-bottom: 1rem;">
+    @if (PizzaWebsiteRepository.GetCurrentCartItems().Count > 0)
+    {
+        <li>
+            <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="Checkout">
+                <img src="https://img.icons8.com/dusk/64/000000/checkout.png" />
+            </a>
+        </li>
+    }
+
+    <li>
+        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    </li>
+    <li>
+        <a class="nav-link" asp-area="" asp-controller="Menu" asp-action="Index">Menu</a>
+    </li>
+    <li>
+        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact Us</a>
+    </li>
+    <li>
+        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Job">Careers</a>
+    </li>
+    <li>
+        <partial name="Footer/_SocialMediaPartial" />
+    </li>
+</ul>

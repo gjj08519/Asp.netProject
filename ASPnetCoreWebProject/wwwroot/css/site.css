@@ -1,0 +1,176 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+
+/*General
+----------------*/
+
+:root {
+    --highlight-primary: #D63F44;
+    --highlight-secondary: #FF6B6B;
+    --light-color: #FFFFFF;
+    --neutral-color: #917C78;
+    --heavy-color: #292F36;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    background-color: var(--light-color);
+    font-size: 16px;
+}
+
+btn, button {
+    background: var(--highlight-secondary);
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 0px ;
+    padding-top: 154px;
+    background-color: var(--light-color);
+    color: var(--heavy-color);
+    font-size: 24px;
+}
+
+a:hover {
+    color: var(--highlight-secondary) !important;
+}
+
+
+/* Changes to other peoples' styling */
+.carousel-control-next:hover, .carousel-control-prev:hover {
+    background-color: rgba(0,0,0,0.3) !important;
+}
+
+.text-danger:hover {
+    color: var(--highlight-secondary) !important;
+}
+
+.btn-primary {
+    background: var(--highlight-primary) !important;
+    border-color: var(--highlight-secondary) !important;
+}
+
+#btn-reset-form {
+    border-color: var(--highlight-secondary) !important;
+    color: var(--highlight-secondary) !important;
+
+}
+
+    #btn-reset-form:hover {
+        background: var(--highlight-secondary) !important;
+        color: var(--light-color) !important;
+    }
+
+.btn-primary:hover {
+    background: var(--highlight-secondary) !important;
+    border-color: var(--highlight-secondary) !important;
+}
+
+.display-4 {
+    margin-bottom: 4rem;
+}
+
+a {
+    color: var(--heavy-color);
+}
+
+.btn-primary {
+    color: #ffff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    color: #ffff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.border-top {
+    border-top: 1px solid;
+}
+
+.border-bottom {
+    border-bottom: 1px solid;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+
+/* Sticky footer styles
+-------------------------------------------------- */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+    /* Vertically center the text there */
+    background-color: var(--highlight-primary);
+}
+
+
+/*
+Navbar
+--------------------------------*/
+
+.navbar {
+    background-color: var(--highlight-primary);
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.navbar-light.a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+a.nav-link {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+
+/*
+A custom class meant for overiding bootstrap
+--------------------------------*/
+
+.custom-header-bar {
+    background-color: var(--highlight-primary);
+}
+
+.custom-header-bar .navbar-brand {
+    font-style: inherit;
+    font-size: x-large;
+}
+
+.custom-header-bar .navbar-nav .nav-link,
+.custom-header-bar .navbar-brand {
+    color: var(--heavy-color);
+}
+
+.custom-header-bar .nav-item:hover .nav-link,
+.custom-header-bar .navbar-brand:hover {
+    color: var(--highlight-secondary);
+}

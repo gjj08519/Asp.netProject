@@ -1,0 +1,59 @@
+﻿@model PizzaWebsite.Models.CartViewModel
+
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<h1>Cart</h1>
+
+<p>
+    <a asp-controller="Menu" asp-action="Index">Add more items</a>
+</p>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th></th>
+            <th class="text-sm-center">
+                Quantity
+            </th>
+            <th class="text-right">
+                Unit Price
+            </th>
+            <th class="text-right">
+                Sub-total
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CartItems) {
+            <tr>
+                <td>
+                    @(string.Format("{0} ({1})",
+                    item.Product.Name,
+                    item.Portion.Label))
+                </td>
+                <td class="text-sm-center">
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td class="text-right">
+                    @item.UnitPrice.ToString("c2")
+                </td>
+                <td class="text-right">
+                    @((item.UnitPrice * item.Quantity).ToString("c2"))
+                </td>
+                <td>
+                    <a asp-controller="Cart" asp-action="Delete" asp-route-productId="@item.ProductId" asp-route-portionId="@item.PortionId">Delete</a>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="5"></td>
+        </tr>
+        <tr class="table-primary" style="font-weight: bold;">
+            <td colspan="3">Total Price:</td>
+            <td class="text-right">@Model.Total.ToString("c2")</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>

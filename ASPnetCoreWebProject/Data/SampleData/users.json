@@ -1,0 +1,26 @@
+[
+  {
+    "UserName": "customer@gmail.com",
+    "Email": "customer@gmail.com"
+  },
+  {
+    "UserName": "owner@gmail.com",
+    "Email": "owner@gmail.com"
+  },
+  {
+    "UserName": "manager@gmail.com",
+    "Email": "manager@gmail.com"
+  },
+  {
+    "UserName": "cook@gmail.com",
+    "Email": "cook@gmail.com"
+  },
+  {
+    "UserName": "deliverer@gmail.com",
+    "Email": "deliverer@gmail.com"
+  },
+  {
+    "UserName": "front@gmail.com",
+    "Email": "front@gmail.com"
+  }
+]

@@ -1,0 +1,25 @@
+﻿.required-label::after {
+    content: "*";
+}
+
+#btn-group-form {
+    display: flex;
+    justify-content: end;
+}
+
+.btn-primary {
+    margin-right: 15px;
+}
+
+.g-recaptcha {
+    display: flex;
+    justify-content: end;
+}
+
+.right-border {
+    border-right: rgb(206,212,218) solid 1px;
+}
+
+.left-border {
+    border-left: rgb(206,212,218) solid 1px;
+}

@@ -1,0 +1,324 @@
+[
+  {
+    "Name": "Pepperoni",
+    "Description": "Pizza with pepperoni.",
+    "Category": "Pizza",
+    "ImageName": "pepperoni-pizza",
+    "Portions": [
+      "Small",
+      "Medium",
+      "Large"
+    ],
+    "Prices": [
+      9.00,
+      10.00,
+      11.00
+    ]
+  },
+  {
+    "Name": "Cheese",
+    "Description": "Pizza with cheese.",
+    "Category": "Pizza",
+    "ImageName": "cheese-pizza",
+    "Portions": [
+      "Small",
+      "Medium",
+      "Large"
+    ],
+    "Prices": [
+      8.50,
+      9.00,
+      9.50
+    ]
+  },
+  {
+    "Name": "All-Dressed",
+    "Description": "Pizza with all standard ingredients.",
+    "Category": "Pizza",
+    "ImageName": "all-dressed-pizza",
+    "Portions": [
+      "Small",
+      "Medium",
+      "Large"
+    ],
+    "Prices": [
+      10.00,
+      11.00,
+      12.00
+    ]
+  },
+  {
+    "Name": "Vegetarian",
+    "Description": "Pizza with a bunch of vegetable ingredients.",
+    "Category": "Pizza",
+    "ImageName": "vegetarian-pizza",
+    "Portions": [
+      "Small",
+      "Medium",
+      "Large"
+    ],
+    "Prices": [
+      15.00,
+      16.50,
+      18.00
+    ]
+  },
+  {
+    "Name": "Poutine",
+    "Description": "Pizza and poutine as one recipe.",
+    "Category": "Pizza",
+    "ImageName": "poutine-pizza",
+    "Portions": [
+      "Small",
+      "Medium",
+      "Large"
+    ],
+    "Prices": [
+      13.00,
+      15.00,
+      17.00
+    ]
+  },
+  {
+    "Name": "Meat-Lovers",
+    "Description": "Pizza with a ton of meat toppings.",
+    "Category": "Pizza",
+    "ImageName": "meat-lovers-pizza",
+    "Portions": [
+      "Small",
+      "Medium",
+      "Large"
+    ],
+    "Prices": [
+      12.00,
+      13.00,
+      14.00
+    ]
+  },
+  {
+    "Name": "Vegan",
+    "Description": "Pizza with no animal products.",
+    "Category": "Pizza",
+    "ImageName": "vegan-pizza",
+    "Portions": [
+      "Small",
+      "Medium",
+      "Large"
+    ],
+    "Prices": [
+      20.00,
+      22.00,
+      24.00
+    ]
+  },
+  {
+    "Name": "Water",
+    "Description": "Bottled water.",
+    "Category": "Drink",
+    "ImageName": "water",
+    "Portions": [
+      "500 ml",
+      "1 Litre",
+      "2 Litre"
+    ],
+    "Prices": [
+      2.00,
+      2.50,
+      3.00
+    ]
+  },
+  {
+    "Name": "Coca-Cola",
+    "Description": "Bottled Coca-Cola.",
+    "Category": "Drink",
+    "ImageName": "coke",
+    "Portions": [
+      "500 ml",
+      "1 Litre",
+      "2 Litre"
+    ],
+    "Prices": [
+      3.50,
+      4.00,
+      4.50
+    ]
+  },
+  {
+    "Name": "Pepsi",
+    "Description": "Bottled Pepsi.",
+    "Category": "Drink",
+    "ImageName": "pepsi",
+    "Portions": [
+      "500 ml",
+      "1 Litre",
+      "2 Litre"
+    ],
+    "Prices": [
+      3.50,
+      4.00,
+      4.50
+    ]
+  },
+  {
+    "Name": "Diet Coke",
+    "Description": "Bottled Diet Coke.",
+    "Category": "Drink",
+    "ImageName": "diet-coke",
+    "Portions": [
+      "500 ml",
+      "1 Litre",
+      "2 Litre"
+    ],
+    "Prices": [
+      4.00,
+      4.50,
+      5.00
+    ]
+  },
+  {
+    "Name": "Diet Pepsi",
+    "Description": "Bottled Diet Pepsi.",
+    "Category": "Drink",
+    "ImageName": "diet-pepsi",
+    "Portions": [
+      "500 ml",
+      "1 Litre",
+      "2 Litre"
+    ],
+    "Prices": [
+      4.00,
+      4.50,
+      5.00
+    ]
+  },
+  {
+    "Name": "7 Up",
+    "Description": "Bottled 7 Up.",
+    "Category": "Drink",
+    "ImageName": "7up",
+    "Portions": [
+      "500 ml",
+      "1 Litre",
+      "2 Litre"
+    ],
+    "Prices": [
+      3.50,
+      4.00,
+      4.50
+    ]
+  },
+  {
+    "Name": "Schweppes Ginger Ale",
+    "Description": "Bottled Schweppes ginger ale.",
+    "Category": "Drink",
+    "ImageName": "schweppes",
+    "Portions": [
+      "500 ml",
+      "1 Litre",
+      "2 Litre"
+    ],
+    "Prices": [
+      4.00,
+      4.50,
+      5.00
+    ]
+  },
+  {
+    "Name": "Fanta",
+    "Description": "Bottled Fanta.",
+    "Category": "Drink",
+    "ImageName": "fanta",
+    "Portions": [
+      "500 ml",
+      "1 Litre",
+      "2 Litre"
+    ],
+    "Prices": [
+      4.00,
+      4.50,
+      5.00
+    ]
+  },
+  {
+    "Name": "Burger",
+    "Description": "A burger.",
+    "Category": "Burger",
+    "ImageName": "burger",
+    "Portions": [
+      "Small",
+      "Medium",
+      "Large"
+    ],
+    "Prices": [
+      5.00,
+      5.50,
+      6.00
+    ]
+  },
+  {
+    "Name": "Cheese Burger",
+    "Description": "A burger with cheese.",
+    "Category": "Burger",
+    "ImageName": "cheese-burger",
+    "Portions": [
+      "Small",
+      "Medium",
+      "Large"
+    ],
+    "Prices": [
+      6.00,
+      6.50,
+      7.00
+    ]
+  },
+  {
+    "Name": "Double Burger",
+    "Description": "A burger with two patties.",
+    "Category": "Burger",
+    "ImageName": "double-burger",
+    "Portions": [
+      "Small",
+      "Medium",
+      "Large"
+    ],
+    "Prices": [
+      7.00,
+      7.50,
+      8.00
+    ]
+  },
+  {
+    "Name": "Double Cheese Burger",
+    "Description": "A burger with two patties and cheese.",
+    "Category": "Burger",
+    "ImageName": "double-cheese-burger",
+    "Portions": [
+      "Small",
+      "Medium",
+      "Large"
+    ],
+    "Prices": [
+      8.00,
+      8.50,
+      9.00
+    ]
+  },
+  {
+    "Name": "French Fries",
+    "Description": "French fries to complement any main course.",
+    "Category": "Side",
+    "ImageName": "french-fries",
+    "Portions": [
+      "Small",
+      "Medium",
+      "Large",
+      "Huge"
+    ],
+    "Prices": [
+      4.00,
+      4.50,
+      5.00,
+      5.50
+    ]
+  }
+]
